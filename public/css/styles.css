@@ -1,1 +1,21 @@
-/* Colocar aquí CSS "propio" */
+.fit-image {
+  width: 50%;
+  object-fit: cover;
+  height: 100%;
+}
+#img-welcome {
+  position: relative;
+}
+#img-welcome::after {
+  content: " ";
+  height: 70px;
+  width: 100%;
+  background: url("../img/logito.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%; /* Necesario para Firefox */
+  position: absolute;
+  bottom: 0;
+}
+#btn-login {
+  color: skyblue;
+}
