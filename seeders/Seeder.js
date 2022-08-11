@@ -12,9 +12,9 @@ module.exports = async () => {
     const user = new User({
       firstname: faker.name.firstName(),
       lastname: faker.name.lastName(),
-      username: faker.internet.userName(),
+      username: faker.internet.userName(), //estaría bueno que se correspondiera con el firstname, lastname
       email: faker.internet.email(),
-      password: await bcrypt.hash("1234", 8),
+      password: await bcrypt.hash("1234", 8), //idealmente en el modelo, un hook
       bio: faker.lorem.paragraphs(),
       avatar: "default.png",
     });
@@ -40,8 +40,8 @@ module.exports = async () => {
 
   for (const tweet of tweets) {
     const likes = Array.from(
-      { length: Math.floor(Math.random() * 20) },
-      () => users[Math.floor(Math.random() * 19)]._id,
+      { length: Math.floor(Math.random() * 20) }, //no incluye el 20!! se puede aprovechar faker!
+      () => users[Math.floor(Math.random() * 19)]._id, // 19, 20 etc, no es descriptivo!!
     );
 
     tweet.likes = likes;
