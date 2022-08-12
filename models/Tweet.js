@@ -1,7 +1,7 @@
 module.exports = (mongoose) => {
   const Schema = mongoose.Schema;
   const tweetSchema = new Schema({
-    content: String,
+    content: { type: String, max: 140 },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     createdAt: Date,
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
