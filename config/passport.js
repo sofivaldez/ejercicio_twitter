@@ -1,8 +1,11 @@
 const passport = require("passport");
+const session = require("express-session");
 const LocalStrategy = require("passport-local");
 const { User } = require("../models");
 
-module.exports = () => {
+module.exports = (app) => {
+  app.use(session({ secret: process.env.APP_SECRET, resave: false, saveUninitialized: false }));
+  app.use(passport.session());
   passport.use(
     new LocalStrategy({ usernameField: "email" }, async function (email, password, done) {
       const user = await User.findOne({
