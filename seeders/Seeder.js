@@ -1,4 +1,5 @@
 const { faker } = require("@faker-js/faker");
+const _ = require("lodash");
 const bcrypt = require("bcryptjs");
 const { User, Tweet } = require("../models/");
 
@@ -22,26 +23,48 @@ module.exports = async () => {
   }
 
   for (let i = 0; i < 40; i++) {
+    const randomUser = users[faker.datatype.number(users.length - 1)];
+
     const tweet = new Tweet({
       content: faker.lorem.paragraphs(),
+      user: randomUser._id,
       createdAt: faker.date.recent(20),
     });
+
+    randomUser.tweets.push(tweet._id);
+
     tweets.push(tweet);
   }
 
-  for (let i = 0; i < users.length; i++) {
-    users[i].tweets.push(tweets[i * 2]._id);
-    users[i].tweets.push(tweets[i * 2 + 1]._id);
-    tweets[i * 2].user = users[i]._id;
-    tweets[i * 2 + 1].user = users[i]._id;
-    users[i].following.push(users[(i + 1) % 20]._id);
-    users[(i + 1) % 20].followers.push(users[i]._id);
+  for (const user of users) {
+    const remainingUsers = _.without(users, user);
+    const someUsers = _.sampleSize(remainingUsers, faker.datatype.number(remainingUsers.length));
+    for (const oneUser of someUsers) {
+      user.following.push(oneUser._id);
+      oneUser.followers.push(user._id);
+    }
   }
+
+  //   for (let i = 0; i < users.length; i++) {
+  //     users[i].tweets = Array.from(
+  //         { length: faker.datatype.number() },
+  //         () => users[Math.floor(Math.random() * 19)]._id,
+  //       )
+  //   }
+
+  //   for (let i = 0; i < users.length; i++) {
+  //     users[i].tweets.push(tweets[i * 2]._id);
+  //     users[i].tweets.push(tweets[i * 2 + 1]._id);
+  //     tweets[i * 2].user = users[i]._id;
+  //     tweets[i * 2 + 1].user = users[i]._id;
+  //     users[i].following.push(users[(i + 1) % 20]._id);
+  //     users[(i + 1) % 20].followers.push(users[i]._id);
+  //   }
 
   for (const tweet of tweets) {
     const likes = Array.from(
-      { length: Math.floor(Math.random() * 20) }, //no incluye el 20!! se puede aprovechar faker!
-      () => users[Math.floor(Math.random() * 19)]._id, // 19, 20 etc, no es descriptivo!!
+      { length: faker.datatype.number(users.length) }, //no incluye el 20!! se puede aprovechar faker!
+      () => users[faker.datatype.number(users.length - 1)]._id, // 19, 20 etc, no es descriptivo!!
     );
 
     tweet.likes = likes;
