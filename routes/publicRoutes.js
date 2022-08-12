@@ -1,6 +1,6 @@
 const express = require("express");
 const publicRouter = express.Router();
-const { login } = require("../middlewares/authenticate");
+const authController = require("../controllers/authController");
 
 publicRouter.get("/", (req, res) => {
   res.render("welcome");
@@ -8,7 +8,7 @@ publicRouter.get("/", (req, res) => {
 publicRouter.get("/login", (req, res) => {
   res.render("login");
 });
-publicRouter.post("/login", login);
+publicRouter.post("/login", authController.login);
 
 publicRouter.get("/register", (req, res) => {
   res.render("register");

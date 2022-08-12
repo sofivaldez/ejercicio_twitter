@@ -1,5 +1,6 @@
 const passport = require("passport");
 const session = require("express-session");
+const bcrypt = require("bcryptjs");
 const LocalStrategy = require("passport-local");
 const { User } = require("../models");
 
@@ -7,12 +8,13 @@ module.exports = (app) => {
   app.use(session({ secret: process.env.APP_SECRET, resave: false, saveUninitialized: false }));
   app.use(passport.session());
   passport.use(
-    new LocalStrategy({ usernameField: "email" }, async function (email, password, done) {
+    new LocalStrategy({ usernameField: "emailorusername" }, async function (email, password, done) {
+      console.log(email, password);
       const user = await User.findOne({
         email: email,
       });
       if (!user) {
-        console.log("usuario inexistente");
+        // console.log("usuario inexistente");
         return done(null, false, { message: "no existe ese usuario" });
       }
 
