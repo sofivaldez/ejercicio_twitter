@@ -2,6 +2,7 @@ const express = require("express");
 const publicRouter = express.Router();
 const authController = require("../controllers/authController");
 const { User } = require("../models");
+const formidable = require("formidable");
 
 publicRouter.get("/", (req, res) => {
   res.render("welcome");
@@ -15,17 +16,27 @@ publicRouter.get("/register", (req, res) => {
   res.render("register");
 });
 
-publicRouter.post("/register", (req, res) => {
-  const user = new User({
-    firstname: req.body.firstname,
-    lastname: req.body.lastName,
-    username: req.body.userName, //estaría bueno que se correspondiera con el firstname, lastname
-    email: req.body.email,
-    password: bcrypt.hash(req.body.password, 8), //idealmente en el modelo, un hook
-    bio: req.body.bio,
-    avatar: "default.png",
+publicRouter.post("/register", async (req, res) => {
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/../public/img",
+    keepExtensions: true,
   });
-  res.send("Te has registrado correctamente");
+  form.parse(req, async (err, fields, files) => {
+    const avatarField = files.avatar.originalFilename ? files.newFilename : null;
+    const newUser = new User({
+      firstname: fields.firstname,
+      lastname: fields.lastname,
+      username: fields.username,
+      email: fields.email,
+      password: await bcrypt.hash(fields.password, 8),
+      bio: fields.bio,
+      avatar: avatarField,
+    });
+    console.log(newUser);
+    await newUser.save();
+    res.redirect("/");
+  });
 });
 
 module.exports = publicRouter;
