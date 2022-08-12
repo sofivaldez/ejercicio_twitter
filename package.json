@@ -15,8 +15,11 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "lodash": "^4.17.21",
-    "mongoose": "^6.5.2"
+    "mongoose": "^6.5.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
   },
   "description": "Hack Academy - Réplica de Twitter",
   "devDependencies": {
