@@ -13,52 +13,35 @@
     />
   </head>
   <body>
-    <form action="/register" method="post">
+    <form action="/register" method="post" enctype="multipart/form-data">
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Nombre</label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        />
-        <label for="exampleInputEmail1" class="form-label">Apellido</label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        />
-        <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        />
-        <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        />
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        <div class="form-group">
-          <label for="bio">Escribe tu bio!</label>
-          <textarea
-            name="bio"
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
-        </div>
+        <label for="firstname" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="firstname" name="firstname" />
+      </div>
+      <div class="mb-3">
+        <label for="lastname" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="lastname" name="lastname" />
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">Nombre de usuario</label>
+        <input type="text" class="form-control" id="username" name="username" />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="email" name="email" />
+      </div>
+      <div class="mb-3">
+        <label for="bio">Escribe tu bio!</label>
+        <textarea name="bio" class="form-control" id="bio" rows="10"></textarea>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
         <input type="password" class="form-control" id="password" name="password" />
       </div>
-
+      <div class="mb-3">
+        <label for="avatar" class="form-label">Foto de Perfil</label>
+        <input class="form-control" type="file" id="avatar" name="avatar" />
+      </div>
       <button type="submit" class="btn btn-primary">Registrarme</button>
     </form>
     <script
