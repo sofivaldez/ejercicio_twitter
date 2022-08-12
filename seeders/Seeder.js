@@ -1,7 +1,7 @@
 const { faker } = require("@faker-js/faker");
 const _ = require("lodash");
 const bcrypt = require("bcryptjs");
-const { User, Tweet } = require("../models/");
+const { User, Tweet } = require("../models");
 
 faker.locale = "es";
 
@@ -62,12 +62,10 @@ module.exports = async () => {
   //   }
 
   for (const tweet of tweets) {
-    const likes = Array.from(
-      { length: faker.datatype.number(users.length) }, //no incluye el 20!! se puede aprovechar faker!
-      () => users[faker.datatype.number(users.length - 1)]._id, // 19, 20 etc, no es descriptivo!!
-    );
-
-    tweet.likes = likes;
+    const someUsers = _.sampleSize(users, faker.datatype.number(users.length));
+    for (const oneUser of someUsers) {
+      tweet.likes.push(oneUser._id);
+    }
   }
 
   await User.insertMany(users);

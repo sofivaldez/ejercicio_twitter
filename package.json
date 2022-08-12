@@ -18,7 +18,7 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.5.2"
   },
-  "description": "Hack Academy - Ejemplo de MVC y Sequelize",
+  "description": "Hack Academy - Réplica de Twitter",
   "devDependencies": {
     "@faker-js/faker": "^6.3.1"
   }
