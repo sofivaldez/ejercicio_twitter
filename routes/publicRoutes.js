@@ -3,6 +3,7 @@ const publicRouter = express.Router();
 const authController = require("../controllers/authController");
 const { User } = require("../models");
 const formidable = require("formidable");
+const bcrypt = require("bcryptjs");
 
 publicRouter.get("/", (req, res) => {
   res.render("welcome");
