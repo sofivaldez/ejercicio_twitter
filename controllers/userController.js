@@ -6,7 +6,14 @@ const bcrypt = require("bcryptjs");
 async function index(req, res) {}
 
 // Display the specified resource.
-async function show(req, res) {}
+async function show(req, res) {
+  const loggedUser = await User.findById(req.user._id).populate({
+    path: "following",
+    populate: { path: "tweets" },
+  });
+  //   console.log(teresa);
+  res.json(loggedUser);
+}
 
 // Show the form for creating a new resource
 async function create(req, res) {}
@@ -23,6 +30,13 @@ async function update(req, res) {}
 // Remove the specified resource from storage.
 async function destroy(req, res) {}
 
+async function logout(req, res) {
+  req.logout(function (err) {
+    if (err) return next(err);
+    res.redirect("/");
+  });
+}
+
 module.exports = {
   index,
   show,
@@ -31,4 +45,5 @@ module.exports = {
   edit,
   update,
   destroy,
+  logout,
 };
