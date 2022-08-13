@@ -27,18 +27,35 @@
         <img id="whiteTwitterLogo" src="img/twitterLogo.svg" alt="whiteTwitterLogo" />
         <div class="col-6">
           <img id="blueTwitterLogo" src="img/blueTwitterLogo.svg" alt="blueTwitterLogo" />
-          <h1 class="welcome">Lo que está pasando ahora</h1>
-          <h2 class="welcome">Únete a Twitter hoy mismo.</h2>
-          <div>
-            <div id="aLogin" class="d-flex">
-              <a href="/login" id="btn-login" class="btn btn-outline-secondary rounded-pill">
-                <img class="googleLogo" src="img/googleLogo.svg" alt="googleLogo" /> Iniciar
-                sesión</a
-              >
-            </div>
+          <h1 class="welcome" id="h1">Lo que está pasando ahora</h1>
+          <h2 class="welcome" id="h2">Únete a Twitter hoy mismo.</h2>
 
-            <a href="/register" id="btn-register" class="btn btn-outline-secondary rounded-pill"
-              >Registrarme</a
+          <div>
+            <a href="/register" id="btn-register" class="btn btn-outline-secondary rounded-pill">
+              <img id="googleLogo" src="img/googleLogo.svg" alt="googleLogo" />Registrarme con
+              Google</a
+            >
+          </div>
+          <div>
+            <a
+              href="/register"
+              id="btn-registerApple"
+              class="btn btn-outline-secondary rounded-pill"
+            >
+              <img id="appleLogo" src="img/appleLogo.svg" alt="appleLogo" />Registrarme con Apple</a
+            >
+          </div>
+          <div><p>o</p></div>
+          <div>
+            <a href="/register">
+              <button class="btn btn-outline-secondary rounded-pill">Registrarme aqui</button>
+            </a>
+          </div>
+
+          <div id="aLogin">
+            <p style="font-weight: bold">¿Ya tienes una cuenta?</p>
+            <a href="/login" id="btn-login" class="btn btn-outline-secondary rounded-pill">
+              Iniciar sesión</a
             >
           </div>
         </div>

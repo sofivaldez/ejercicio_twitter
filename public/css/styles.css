@@ -22,8 +22,39 @@
 }
 .welcome {
   font-family: Verdana, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: bold;
 }
-#aLogin {
-  width: 20px;
-  height: 20px;
+#h1 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+#h2 {
+  margin-bottom: 50px;
+}
+#googleLogo {
+  width: 15px;
+  height: 15px;
+}
+#appleLogo {
+  width: 15px;
+  height: 15px;
+}
+#btn-login {
+  color: #1c9cf4;
+  border-color: #1c9cf4;
+  font-weight: 700;
+}
+
+#btn-registerApple {
+  margin-top: 10px;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+#btn-registerNumber {
+  color: white;
+  background-color: #1c9cf4;
+  border-color: #1c9cf4;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
