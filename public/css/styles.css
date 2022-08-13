@@ -1,9 +1,9 @@
 * {
   margin: 0px;
-  padding: 0;
 }
-.container {
-  min-height: 100vh;
+
+#welcome-row {
+  height: 100vh;
 }
 
 /* #img-welcome::after {

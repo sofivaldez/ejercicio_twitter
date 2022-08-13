@@ -7,7 +7,7 @@ const dbInitialSetup = require("./seeders/seeder");
 const APP_PORT = process.env.APP_PORT || 3000;
 const app = express();
 
-app.use(express.static("public"));
+app.use("/public", express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 passportConfig(app);
