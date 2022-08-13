@@ -43,16 +43,4 @@ adminRouter.get("/unfollow/:username", checkAuthenticated, async (req, res) => {
   res.redirect("/home");
 });
 
-adminRouter.post("/tweet", async (req, res) => {
-  const newTweet = new Tweet({
-    content: req.body.tweet,
-    user: req.user._id,
-    createdAt: new Date(),
-  });
-  await newTweet.save();
-  await User.findByIdAndUpdate(req.user._id, { $push: { tweets: newTweet._id } });
-
-  res.redirect("home");
-});
-
 module.exports = adminRouter;

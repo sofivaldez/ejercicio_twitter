@@ -32,8 +32,12 @@ async function store(req, res) {
         bio: fields.bio,
         avatar: avatarField,
       });
-      await newUser.save();
-      res.redirect("/");
+      try {
+        await newUser.save();
+      } catch {
+        return res.redirect("register");
+      }
+      return res.redirect("/");
     } else res.redirect("register");
   });
 }
