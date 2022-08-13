@@ -13,6 +13,18 @@
     />
   </head>
   <body>
+    <form action="/tweet" method="post">
+      <div class="mb-3">
+        <textarea
+          name="tweet"
+          class="form-control"
+          id="bio"
+          rows="3"
+          placeholder="¿Qué está pasando?"
+        ></textarea>
+        <button type="submit" class="btn btn-primary">Tweet</button>
+      </div>
+    </form>
     <h6>
       Hola <%= loggedUser.firstname %>! Te extrañamos! Echa un vistazo a lo que han publicado tus
       cuentas de interés:
