@@ -9,7 +9,11 @@ tweetRouter.post("/tweet", checkAuthenticated, async (req, res) => {
     user: req.user._id,
     createdAt: new Date(),
   });
-  await newTweet.save();
+  try {
+    await newTweet.save();
+  } catch {
+    return res.redirect("home");
+  }
   await User.findByIdAndUpdate(req.user._id, { $push: { tweets: newTweet._id } });
 
   res.redirect("home");
@@ -23,7 +27,6 @@ tweetRouter.get("/deleteTweet/:id", checkAuthenticated, async (req, res) => {
 
 tweetRouter.get("/like/:id", checkAuthenticated, async (req, res) => {
   const wantedTweet = await Tweet.findById(req.params.id);
-  console.log(wantedTweet);
   const alreadyLiked = wantedTweet.likes.includes(req.user._id);
   if (!alreadyLiked) await wantedTweet.updateOne({ $push: { likes: req.user._id } });
   else await wantedTweet.updateOne({ $pull: { likes: req.user._id } });
