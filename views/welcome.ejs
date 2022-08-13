@@ -18,21 +18,24 @@
     <div class="container-fluid">
       <div class="row" id="welcome-row">
         <div
+          id="mainWelcomeImage"
           class="col-6"
           style="
             background-image: url('https://abs.twimg.com/sticky/illustrations/lohp_850x623.png');
           "
-        >
-          <img class="img-responsive fit-image" src="alt" ="twitter" />
-        </div>
-
+        ></div>
+        <img id="whiteTwitterLogo" src="/public/img/twitterLogo.svg" alt="whiteTwitterLogo" />
         <div class="col-6">
-          <h1>Lo que está pasando ahora</h1>
-          <h2>Únete a Twitter hoy mismo.</h2>
+          <img id="blueTwitterLogo" src="/public/img/blueTwitterLogo.svg" alt="blueTwitterLogo" />
+          <h1 class="welcome">Lo que está pasando ahora</h1>
+          <h2 class="welcome">Únete a Twitter hoy mismo.</h2>
           <div>
-            <a href="/login" id="btn-login" class="btn btn-outline-secondary rounded-pill"
-              >Iniciar sesión</a
-            >
+            <div>
+              <a href="/login" id="btn-login" class="btn btn-outline-secondary rounded-pill"
+                >Iniciar sesión</a
+              >
+            </div>
+
             <a href="/register" id="btn-register" class="btn btn-outline-secondary rounded-pill"
               >Registrarme</a
             >
