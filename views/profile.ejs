@@ -13,7 +13,11 @@
     />
   </head>
   <body>
-    <h6>Perfil de <%= wantedUser.username %>:</h6>
+    <% if (checkingOwnProfile) { %>
+    <h6>Echa un vistazo a tu perfil:</h6>
+    <% } %> <% else { %>
+    <h6>Echa un vistazo al perfil de <%= wantedUser.username %>:</h6>
+    <% } %>
     <ul>
       <li><%= wantedUser.firstname %></li>
       <li><%= wantedUser.lastname %></li>
@@ -21,12 +25,15 @@
       <li><%= wantedUser.email %></li>
       <li><%= wantedUser.bio %></li>
     </ul>
-    <h6><%= wantedUser.username %> ha publicado:</h6>
+    <% if (wantedUser.tweets.length === 0) { %>
+    <p>No hay publicaciones hasta la fecha</p>
+    <% } else { %>
+    <h6>Publicaciones:</h6>
     <% for(const tweet of wantedUser.tweets) { %>
     <p><%= tweet.content %></p>
     <p>a <%= tweet.createdAt %></p>
     <hr />
-    <% } %>
+    <% } %> <% } %>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

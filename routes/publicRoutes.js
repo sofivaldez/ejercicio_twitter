@@ -24,7 +24,8 @@ publicRouter.get("/profile/:username", async (req, res) => {
   const wantedUser = await User.findOne({ username: req.params.username }).populate({
     path: "tweets",
   });
-  res.render("profile", { wantedUser });
+  const checkingOwnProfile = req.user._id === wantedUser._id;
+  res.render("profile", { wantedUser, checkingOwnProfile });
 });
 
 module.exports = publicRouter;
