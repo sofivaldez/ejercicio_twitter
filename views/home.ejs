@@ -18,7 +18,7 @@
       cuentas de interés:
     </h6>
     <% for(const following of loggedUser.following) { %> <% if (following.tweets.length!=0) {%>
-    <img src="img/default.png" alt="avatar" style="size: 10px 10px" />
+    <img src="img/default.png" alt="avatar" style="width: 10px height 10px" />
     <p><%= following.firstname %> publicó:</p>
     <% for(const tweet of following.tweets) { %>
     <p><%= tweet.content %></p>
