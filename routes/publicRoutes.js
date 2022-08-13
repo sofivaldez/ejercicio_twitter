@@ -20,12 +20,4 @@ publicRouter.get("/register", (req, res) => {
 
 publicRouter.post("/register", publicController.store);
 
-publicRouter.get("/profile/:username", async (req, res) => {
-  const wantedUser = await User.findOne({ username: req.params.username }).populate({
-    path: "tweets",
-  });
-  const checkingOwnProfile = req.user.username === wantedUser.username;
-  res.render("profile", { wantedUser, checkingOwnProfile });
-});
-
 module.exports = publicRouter;
