@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Tweet } = require("../models");
 const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
 
@@ -11,7 +11,10 @@ async function show(req, res) {
     path: "following",
     populate: { path: "tweets" },
   });
-  //   console.log(teresa);
+  const tweets = await Tweet.find()
+    .populate({ path: "user", select: "firstname" })
+    .sort({ createdAt: "desc" });
+  // console.log(tweets);
   res.render("home", { loggedUser });
 }
 
