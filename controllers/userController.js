@@ -12,7 +12,7 @@ async function show(req, res) {
     populate: { path: "tweets" },
   });
   //   console.log(teresa);
-  res.json(loggedUser);
+  res.render("home", { loggedUser });
 }
 
 // Show the form for creating a new resource
