@@ -25,7 +25,14 @@ async function create(req, res) {}
 async function store(req, res) {}
 
 // Show the form for editing the specified resource.
-async function edit(req, res) {}
+async function editProfileForm(req, res) {
+  const wantedUser = await User.findOne({ username: req.params.username });
+
+  res.render("editProfileForm", { wantedUser });
+}
+async function storeProfile(req, res) {
+  res.send("Estoy en post");
+}
 
 // Update the specified resource in storage.
 async function update(req, res) {}
@@ -45,8 +52,9 @@ module.exports = {
   show,
   create,
   store,
-  edit,
-  update,
+  editProfileForm,
+  storeProfile,
+  // update,
   destroy,
   logout,
 };

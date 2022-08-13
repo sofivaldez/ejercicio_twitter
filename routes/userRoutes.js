@@ -28,5 +28,8 @@ adminRouter.get("/follow/:username", checkAuthenticated, async (req, res) => {
   }
   res.redirect("/home");
 });
+adminRouter.get("/editar/:username", userController.editProfileForm);
+adminRouter.post("/edit/:username", userController.storeProfile);
+//faltacheckAuthenticated
 
 module.exports = adminRouter;
