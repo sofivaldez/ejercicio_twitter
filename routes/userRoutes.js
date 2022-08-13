@@ -20,11 +20,22 @@ adminRouter.get("/follow/:username", checkAuthenticated, async (req, res) => {
   const wantedUser = await User.findOne({ username: req.params.username });
   const loggedUser = await User.findById(req.user._id);
   const notFollowing = !loggedUser.following.includes(wantedUser._id);
-  const notSelf = wantedUser.username !== loggedUser.username;
-  console.log(req.user._id);
+  const notSelf = !wantedUser._id.equals(req.user._id);
   if (notFollowing && notSelf) {
     await loggedUser.updateOne({ $push: { following: wantedUser._id } });
     await wantedUser.updateOne({ $push: { followers: loggedUser._id } });
+  }
+  res.redirect("/home");
+});
+
+adminRouter.get("/unfollow/:username", checkAuthenticated, async (req, res) => {
+  const wantedUser = await User.findOne({ username: req.params.username });
+  const loggedUser = await User.findById(req.user._id);
+  const Following = loggedUser.following.includes(wantedUser._id);
+  const notSelf = !wantedUser._id.equals(req.user._id);
+  if (Following && notSelf) {
+    await loggedUser.updateOne({ $pull: { following: wantedUser._id } });
+    await wantedUser.updateOne({ $pull: { followers: loggedUser._id } });
   }
   res.redirect("/home");
 });
