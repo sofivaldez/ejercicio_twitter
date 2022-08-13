@@ -21,6 +21,9 @@
   margin: 10px;
 }
 .welcome {
-  font-family: TwitterChirpExtendedHeavy, Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
+  font-family: Verdana, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+#aLogin {
+  width: 20px;
+  height: 20px;
 }
