@@ -4,7 +4,7 @@ const authController = require("../controllers/authController");
 const { User } = require("../models");
 const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
-const { storeUser } = require("../controllers/userController");
+const publicController = require("../controllers/publicController");
 
 publicRouter.get("/", (req, res) => {
   res.render("welcome");
@@ -18,6 +18,6 @@ publicRouter.get("/register", (req, res) => {
   res.render("register");
 });
 
-publicRouter.post("/register", storeUser);
+publicRouter.post("/register", publicController.store);
 
 module.exports = publicRouter;

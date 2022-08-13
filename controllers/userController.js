@@ -23,29 +23,6 @@ async function update(req, res) {}
 // Remove the specified resource from storage.
 async function destroy(req, res) {}
 
-// Otros handlers...
-async function storeUser(req, res) {
-  const form = formidable({
-    multiples: true,
-    uploadDir: __dirname + "/../public/img",
-    keepExtensions: true,
-  });
-  form.parse(req, async (err, fields, files) => {
-    const avatarField = files.avatar.originalFilename ? files.newFilename : null;
-    const newUser = new User({
-      firstname: fields.firstname,
-      lastname: fields.lastname,
-      username: fields.username,
-      email: fields.email,
-      password: await bcrypt.hash(fields.password, 8),
-      bio: fields.bio,
-      avatar: avatarField,
-    });
-    await newUser.save();
-    res.redirect("/");
-  });
-}
-
 module.exports = {
   index,
   show,
@@ -54,5 +31,4 @@ module.exports = {
   edit,
   update,
   destroy,
-  storeUser,
 };

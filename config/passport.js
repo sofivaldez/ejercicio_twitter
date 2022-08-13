@@ -8,10 +8,14 @@ module.exports = (app) => {
   app.use(session({ secret: process.env.APP_SECRET, resave: false, saveUninitialized: false }));
   app.use(passport.session());
   passport.use(
-    new LocalStrategy({ usernameField: "emailorusername" }, async function (email, password, done) {
-      console.log(email, password);
+    new LocalStrategy({ usernameField: "emailorusername" }, async function (
+      emailorusername,
+      password,
+      done,
+    ) {
+      console.log(emailorusername, password);
       const user = await User.findOne({
-        email: email,
+        $or: [{ email: emailorusername }, { username: emailorusername }],
       });
       if (!user) {
         // console.log("usuario inexistente");
