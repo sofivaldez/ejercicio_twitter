@@ -13,6 +13,9 @@
     />
   </head>
   <body>
+    <a href="/profile/<%= loggedUser.username %>">
+      <img src="/img/<%= loggedUser.avatar %>" alt="avatar" height="150px" width="150px"
+    /></a>
     <form action="/tweet" method="post">
       <div class="mb-3">
         <textarea
@@ -25,22 +28,32 @@
         <button type="submit" class="btn btn-primary">Tweet</button>
       </div>
     </form>
-    <h6>
+
+    <h5>
       Hola <%= loggedUser.firstname %>! Te extrañamos! Echa un vistazo a lo que han publicado tus
       cuentas de interés:
-    </h6>
+    </h5>
     <% for(const tweet of wantedTweets) { %>
-    <img src="/img/<%= tweet.user.avatar %>" alt="avatar" height="80px" width="80px" />
-    <p><%= tweet.user.username %> publicó:</p>
+    <a href="profile/<%= tweet.user.username %> ">
+      <img src="/img/<%= tweet.user.avatar %>" alt="avatar" height="80px" width="80px"
+    /></a>
+    <h6><%= tweet.user.username %> publicó:</h6>
     <p><%= tweet.content %></p>
     <p>a <%= tweet.createdAt %></p>
-    <a href="/profile/<%= tweet.user.username %>" class="btn btn-primary">Ver perfil</a>
+    <a href="/unfollow/<%= tweet.user.username %>" class="btn btn-primary">Dejar de seguir</a>
     <hr />
     <% } %>
-    <a href="/profile/<%= loggedUser.username %>" class="btn btn-primary">Tu perfil</a>
-    <h6>Cuentas a seguir:</h6>
+    <h5>Cuentas a seguir:</h5>
     <% for(const recommendedUser of recommendedUsers) { %>
-    <img src="/img/<%= recommendedUser.avatar %> " alt="avatar" width="100px" height="100px" />
+    <div class="mb-3">
+      <a href="profile/<%= recommendedUser.username %> ">
+        <img src="/img/<%= recommendedUser.avatar %> " alt="avatar" width="80px" height="80px" />
+        <h6><%= recommendedUser.username %></h6>
+      </a>
+      <a href="follow/<%= recommendedUser.username %> "
+        ><button class="btn btn-primary">Seguir</button></a
+      >
+    </div>
     <% } %>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

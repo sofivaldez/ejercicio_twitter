@@ -44,7 +44,6 @@ async function updateProfile(req, res) {
       avatar: files.avatar.newFilename,
     };
     const updatedUser = await req.user.updateOne(update);
-    console.log(updatedUser);
     res.redirect(`/profile/${req.user.username}`);
 
     // res.redirect("/home");
