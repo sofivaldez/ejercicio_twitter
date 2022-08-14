@@ -41,8 +41,13 @@
     <h6><%= tweet.user.username %> publicó:</h6>
     <p><%= tweet.content %></p>
     <p>a <%= tweet.createdAt %></p>
+    <% if (!tweet.likes.includes(loggedUser.id)) { %>
     <a href="/like/<%= tweet._id %> "><button class="btn btn-outline-primary">Me gusta</button></a>
-
+    <span style="color: blue"><%= tweet.likes.length %> </span>
+    <% } else { %>
+    <a href="/like/<%= tweet._id %> "><button class="btn btn-primary">Me gusta</button></a>
+    <span style="color: blue"><%= tweet.likes.length %> </span>
+    <% } %>
     <hr />
     <% } %>
     <h5>Cuentas a seguir:</h5>
