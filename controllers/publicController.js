@@ -31,7 +31,7 @@ async function store(req, res) {
         email: fields.email,
         password: await bcrypt.hash(fields.password, 8),
         bio: fields.bio,
-        avatar: "default.png",
+        avatar: files.newFilename,
       });
       try {
         await newUser.save();
