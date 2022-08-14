@@ -25,12 +25,25 @@ async function store(req, res) {}
 
 // Show the form for editing the specified resource.
 async function editProfileForm(req, res) {
+  const loggedUser = req.user;
+  const notSelf = req.params.username !== loggedUser.username;
+
+  if (notSelf) {
+    return res.redirect("/");
+  }
   const wantedUser = await User.findOne({ username: req.params.username });
 
   res.render("editProfileForm", { wantedUser });
 }
 
 async function updateProfile(req, res) {
+  const loggedUser = req.user;
+  const notSelf = req.params.username !== loggedUser.username;
+
+  if (notSelf) {
+    return res.redirect("/");
+  }
+
   const form = formidable({
     multiples: true,
     uploadDir: __dirname + "/../public/img",
