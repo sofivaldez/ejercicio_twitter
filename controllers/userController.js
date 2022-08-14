@@ -29,8 +29,26 @@ async function editProfileForm(req, res) {
 
   res.render("editProfileForm", { wantedUser });
 }
-async function storeProfile(req, res) {
-  res.send("Estoy en post");
+
+async function updateProfile(req, res) {
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/public/img",
+    keepExtensions: true,
+  });
+  form.parse(req, async (err, fields, files) => {
+    const update = {
+      firstname: fields.firstname,
+      lastname: fields.lastname,
+      bio: fields.bio,
+      avatar: files.avatar.newFilename,
+    };
+    const updatedUser = await req.user.updateOne(update);
+    console.log(updatedUser);
+    // res.redirect(`/profile/${updatedUser.username}`);
+
+    res.redirect("/home");
+  });
 }
 
 // Update the specified resource in storage.
@@ -52,7 +70,7 @@ module.exports = {
   create,
   store,
   editProfileForm,
-  storeProfile,
+  updateProfile,
   // update,
   destroy,
   logout,

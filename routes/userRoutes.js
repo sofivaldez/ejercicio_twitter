@@ -27,9 +27,8 @@ adminRouter.get("/follow/:username", checkAuthenticated, async (req, res) => {
   }
   res.redirect("/home");
 });
-adminRouter.get("/editar/:username", userController.editProfileForm);
-adminRouter.post("/edit/:username", userController.storeProfile);
-//faltacheckAuthenticated
+adminRouter.get("/editar/:username", checkAuthenticated, userController.editProfileForm);
+adminRouter.post("/edit/:username", checkAuthenticated, userController.updateProfile);
 
 adminRouter.get("/unfollow/:username", checkAuthenticated, async (req, res) => {
   const wantedUser = await User.findOne({ username: req.params.username });
