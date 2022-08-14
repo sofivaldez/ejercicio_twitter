@@ -33,7 +33,7 @@ async function editProfileForm(req, res) {
 async function updateProfile(req, res) {
   const form = formidable({
     multiples: true,
-    uploadDir: __dirname + "/public/img",
+    uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
   form.parse(req, async (err, fields, files) => {
@@ -45,9 +45,9 @@ async function updateProfile(req, res) {
     };
     const updatedUser = await req.user.updateOne(update);
     console.log(updatedUser);
-    // res.redirect(`/profile/${updatedUser.username}`);
+    res.redirect(`/profile/${req.user.username}`);
 
-    res.redirect("/home");
+    // res.redirect("/home");
   });
 }
 
