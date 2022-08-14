@@ -12,8 +12,9 @@ async function show(req, res) {
     .populate({ path: "user" })
     .sort({ createdAt: "desc" })
     .limit(20);
-  console.log(wantedTweets.length);
-  res.render("home", { loggedUser: req.user, wantedTweets });
+  const loggedUser = req.user;
+  const recommendedUsers = await User.find({ _id: { $nin: loggedUser.following } }).limit(20);
+  res.render("home", { loggedUser, wantedTweets, recommendedUsers });
 }
 
 // Show the form for creating a new resource

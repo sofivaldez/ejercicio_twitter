@@ -22,7 +22,7 @@ async function store(req, res) {
       $or: [{ email: fields.email }, { username: fields.username }],
     });
     if (!user) {
-      const avatarField = files.avatar.originalFilename ? files.newFilename : null;
+      const avatarField = files.avatar.originalFilename ? files.avatar.newFilename : null;
       console.log(files);
       const newUser = new User({
         firstname: fields.firstname,
@@ -31,7 +31,7 @@ async function store(req, res) {
         email: fields.email,
         password: await bcrypt.hash(fields.password, 8),
         bio: fields.bio,
-        avatar: "default.png",
+        avatar: files.avatar.newFilename,
       });
       try {
         await newUser.save();
