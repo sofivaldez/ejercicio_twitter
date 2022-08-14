@@ -13,11 +13,16 @@
     />
   </head>
   <body>
-    <% if (checkingOwnProfile) { %>
+    <!-- <% if (checkingOwnProfile) { %>
     <h6>Echa un vistazo a tu perfil:</h6>
     <% } else { %>
     <h6>Echa un vistazo al perfil de <%= wantedUser.username %>:</h6>
-    <% } %>
+    <% } %> -->
+    <div class="mt-3 mb-3">
+      <h4><%= wantedUser.firstname %> <%= wantedUser.lastname %></h4>
+      <span><%= wantedUser.tweets.length %> tweets </span>
+    </div>
+
     <img src="/img/<%= wantedUser.avatar %>" alt="avatar" height="80px" width="80px" />
 
     <% if(!checkingOwnProfile && !alreadyFollowing ){ %>
@@ -29,6 +34,21 @@
     <% } %> <% if (checkingOwnProfile) { %>
     <a class="btn btn-primary" href="/editar/<%= wantedUser.username %> ">Editar perfil</a>
     <% } %>
+
+    <div class="mt-3 mb-3">
+      <h5><%= wantedUser.firstname %> <%= wantedUser.lastname %></h5>
+      <span>@<%= wantedUser.username %></span>
+    </div>
+
+    <span>
+      <a href="/siguiendo/<%= wantedUser.username %> "
+        ><%= wantedUser.following.length %> Siguiendo
+      </a></span
+    ><span
+      ><a href="/seguidores/<%= wantedUser.username %> ">
+        <%= wantedUser.followers.length %> Seguidores</a
+      ></span
+    >
 
     <ul>
       <li><%= wantedUser.firstname %></li>

@@ -50,13 +50,15 @@ async function updateProfile(req, res) {
     keepExtensions: true,
   });
   form.parse(req, async (err, fields, files) => {
-    const update = {
-      firstname: fields.firstname,
-      lastname: fields.lastname,
-      bio: fields.bio,
-      avatar: files.avatar.newFilename,
-    };
-    const updatedUser = await req.user.updateOne(update);
+    const update = files.avatar.newFilename
+      ? {
+          firstname: fields.firstname,
+          lastname: fields.lastname,
+          bio: fields.bio,
+          avatar: files.avatar.newFilename,
+        }
+      : { firstname: fields.firstname, lastname: fields.lastname, bio: fields.bio };
+    await req.user.updateOne(update);
     res.redirect(`/profile/${req.user.username}`);
 
     // res.redirect("/home");
