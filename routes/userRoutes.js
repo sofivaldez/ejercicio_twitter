@@ -13,7 +13,8 @@ adminRouter.get("/profile/:username", checkAuthenticated, async (req, res) => {
     path: "tweets",
   });
   const checkingOwnProfile = req.user.id === wantedUser.id;
-  res.render("profile", { wantedUser, checkingOwnProfile });
+  const following = req.user.following;
+  res.render("profile", { wantedUser, checkingOwnProfile, following });
 });
 
 adminRouter.get("/follow/:username", checkAuthenticated, async (req, res) => {

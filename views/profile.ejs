@@ -19,7 +19,12 @@
     <h6>Echa un vistazo al perfil de <%= wantedUser.username %>:</h6>
     <% } %>
     <img src="/img/<%= wantedUser.avatar %>" alt="avatar" height="80px" width="80px" />
-    <a href="follow/<%= wantedUser.username %>"><button class="btn btn-primary">Seguir</button></a>
+    <% if(!checkingOwnProfile && following ){ %>
+    <a href="/follow/<%= wantedUser.username %>"><button class="btn btn-primary">Seguir</button></a>
+    <% } %> <% if (checkingOwnProfile) { %>
+    <a class="btn btn-primary" href="/editar/<%= wantedUser.username %> ">Editar perfil</a>
+    <% } %>
+
     <ul>
       <li><%= wantedUser.firstname %></li>
       <li><%= wantedUser.lastname %></li>
