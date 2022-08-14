@@ -20,8 +20,12 @@
     <% } %>
     <img src="/img/<%= wantedUser.avatar %>" alt="avatar" height="80px" width="80px" />
 
-    <% if(!checkingOwnProfile && following ){ %>
+    <% if(!checkingOwnProfile && !alreadyFollowing ){ %>
     <a href="/follow/<%= wantedUser.username %>"><button class="btn btn-primary">Seguir</button></a>
+    <% } %> <% if(!checkingOwnProfile && alreadyFollowing ){ %>
+    <a href="/unfollow/<%= wantedUser.username %>"
+      ><button class="btn btn-primary">Dejar de seguir</button></a
+    >
     <% } %> <% if (checkingOwnProfile) { %>
     <a class="btn btn-primary" href="/editar/<%= wantedUser.username %> ">Editar perfil</a>
     <% } %>

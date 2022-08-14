@@ -12,9 +12,10 @@ adminRouter.get("/profile/:username", checkAuthenticated, async (req, res) => {
   const wantedUser = await User.findOne({ username: req.params.username }).populate({
     path: "tweets",
   });
+  const loggedUser = req.user;
   const checkingOwnProfile = req.user.id === wantedUser.id;
-  const following = req.user.following;
-  res.render("profile", { wantedUser, checkingOwnProfile, following });
+  const alreadyFollowing = loggedUser.following.includes(wantedUser._id);
+  res.render("profile", { wantedUser, checkingOwnProfile, alreadyFollowing });
 });
 
 adminRouter.get("/follow/:username", checkAuthenticated, async (req, res) => {
