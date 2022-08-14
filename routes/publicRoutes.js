@@ -9,13 +9,15 @@ const publicController = require("../controllers/publicController");
 publicRouter.get("/", (req, res) => {
   res.render("welcome");
 });
-publicRouter.get("/login", (req, res) => {
-  res.render("login");
+publicRouter.get("/login", async (req, res) => {
+  const messages = await req.consumeFlash("info");
+  res.render("login", { messages });
 });
 publicRouter.post("/login", authController.login);
 
-publicRouter.get("/register", (req, res) => {
-  res.render("register");
+publicRouter.get("/register", async (req, res) => {
+  const messages = await req.consumeFlash("info");
+  res.render("register", { messages });
 });
 
 publicRouter.post("/register", publicController.store);

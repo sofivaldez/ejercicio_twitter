@@ -1,21 +1,19 @@
 const { User, Tweet } = require("../models");
 const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
+const _ = require("lodash");
 
 // Display a listing of the resource.
 async function index(req, res) {}
 
 // Display the specified resource.
 async function show(req, res) {
-  const loggedUser = await User.findById(req.user._id).populate({
-    path: "following",
-    populate: { path: "tweets" },
-  });
-  const tweets = await Tweet.find()
-    .populate({ path: "user", select: "firstname" })
-    .sort({ createdAt: "desc" });
-  // console.log(tweets);
-  res.render("home", { loggedUser });
+  const wantedTweets = await Tweet.find({ user: { $in: req.user.following } })
+    .populate({ path: "user" })
+    .sort({ createdAt: "desc" })
+    .limit(20);
+  console.log(wantedTweets.length);
+  res.render("home", { loggedUser: req.user, wantedTweets });
 }
 
 // Show the form for creating a new resource

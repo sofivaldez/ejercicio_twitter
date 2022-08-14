@@ -8,29 +8,25 @@ module.exports = (app) => {
   app.use(session({ secret: process.env.APP_SECRET, resave: false, saveUninitialized: false }));
   app.use(passport.session());
   passport.use(
-    new LocalStrategy({ usernameField: "emailorusername" }, async function (
-      emailorusername,
-      password,
-      done,
-    ) {
-      console.log(emailorusername, password);
-      const user = await User.findOne({
-        $or: [{ email: emailorusername }, { username: emailorusername }],
-      });
-      if (!user) {
-        // console.log("usuario inexistente");
-        return done(null, false, { message: "no existe ese usuario" });
-      }
+    new LocalStrategy(
+      { passReqToCallback: true, usernameField: "emailorusername" },
+      async function (req, emailorusername, password, done) {
+        const user = await User.findOne({
+          $or: [{ email: emailorusername }, { username: emailorusername }],
+        });
+        if (!user) {
+          return done(null, false, await req.flash("info", "**Credenciales erróneas**"));
+        }
 
-      const verifyPassword = await bcrypt.compare(password, user.password);
-      //agregar flash-message
-      if (!verifyPassword) {
-        console.log("contraseña incorrecta");
-        return done(null, false, { message: "contraseña incorrecta" });
-      }
-      // console.log(user);
-      return done(null, user);
-    }),
+        const verifyPassword = await bcrypt.compare(password, user.password);
+        //agregar flash-message
+        if (!verifyPassword) {
+          return done(null, false, await req.flash("info", "**Credenciales erróneas**"));
+        }
+        // console.log(user);
+        return done(null, user);
+      },
+    ),
   );
   passport.serializeUser((user, done) => {
     done(null, user.id);

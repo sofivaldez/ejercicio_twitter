@@ -7,7 +7,6 @@ tweetRouter.post("/tweet", checkAuthenticated, async (req, res) => {
   const newTweet = new Tweet({
     content: req.body.tweet,
     user: req.user._id,
-    createdAt: new Date(),
   });
   try {
     await newTweet.save();
