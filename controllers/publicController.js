@@ -23,6 +23,7 @@ async function store(req, res) {
     });
     if (!user) {
       const avatarField = files.avatar.originalFilename ? files.newFilename : null;
+      console.log(files);
       const newUser = new User({
         firstname: fields.firstname,
         lastname: fields.lastname,
@@ -30,7 +31,7 @@ async function store(req, res) {
         email: fields.email,
         password: await bcrypt.hash(fields.password, 8),
         bio: fields.bio,
-        avatar: avatarField,
+        avatar: "default.png",
       });
       try {
         await newUser.save();

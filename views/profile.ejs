@@ -18,6 +18,7 @@
     <% } else { %>
     <h6>Echa un vistazo al perfil de <%= wantedUser.username %>:</h6>
     <% } %>
+    <img src="/img/<%= wantedUser.avatar %>" alt="avatar" height="80px" width="80px" />
     <ul>
       <li><%= wantedUser.firstname %></li>
       <li><%= wantedUser.lastname %></li>

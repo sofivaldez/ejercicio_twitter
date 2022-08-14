@@ -30,7 +30,7 @@
       cuentas de interés:
     </h6>
     <% for(const tweet of wantedTweets) { %>
-    <img src="img/<%= tweet.user.avatar %> " alt="avatar" height="80px" width="80px" />
+    <img src="/img/<%= tweet.user.avatar %>" alt="avatar" height="80px" width="80px" />
     <p><%= tweet.user.username %> publicó:</p>
     <p><%= tweet.content %></p>
     <p>a <%= tweet.createdAt %></p>
