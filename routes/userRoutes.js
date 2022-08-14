@@ -44,4 +44,20 @@ adminRouter.get("/unfollow/:username", checkAuthenticated, async (req, res) => {
   res.redirect("/home");
 });
 
+adminRouter.get("/siguiendo/:username", checkAuthenticated, async (req, res) => {
+  const wantedUser = await User.findOne({ username: req.params.username }).populate({
+    path: "following",
+  });
+  const following = wantedUser.following;
+  res.render("following_followers", { users: following, role: "following" });
+});
+
+adminRouter.get("/seguidores/:username", checkAuthenticated, async (req, res) => {
+  const wantedUser = await User.findOne({ username: req.params.username }).populate({
+    path: "followers",
+  });
+  const followers = wantedUser.followers;
+  res.render("following_followers", { users: followers, role: "followers" });
+});
+
 module.exports = adminRouter;

@@ -34,10 +34,12 @@
       cuentas de interés:
     </h5>
     <% for(const tweet of wantedTweets) { %>
-    <a href="profile/<%= tweet.user.username %> ">
-      <img src="/img/<%= tweet.user.avatar %>" alt="avatar" height="80px" width="80px"
-    /></a>
-    <a href="/unfollow/<%= tweet.user.username %>" class="btn btn-primary">Dejar de seguir</a>
+    <div class="mb-3">
+      <a href="profile/<%= tweet.user.username %> ">
+        <img src="/img/<%= tweet.user.avatar %>" alt="avatar" height="80px" width="80px"
+      /></a>
+      <a href="/unfollow/<%= tweet.user.username %>" class="btn btn-primary">Dejar de seguir</a>
+    </div>
     <h6><%= tweet.user.username %> publicó:</h6>
     <p><%= tweet.content %></p>
     <p>a <%= tweet.createdAt %></p>
