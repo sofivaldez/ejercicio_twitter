@@ -129,29 +129,28 @@
           <div id="whoToFollow"  > 
             <h5 class="p-3">Cuentas a seguir:</h5>
             <div>
-              <div>
-                <% for(const recommendedUser of recommendedUsers) { %>
-                  <div class="mb-3 d-flex justify-content-between">
-                    <div class="ms-3 align-items-center"><a href="profile/<%= recommendedUser.username %> ">
-                      <img
-                      id="avatar-colleft"
-                        src="/img/<%= recommendedUser.avatar %> "
-                        alt="avatar"
-                        width="80px"
-                        height="80px"
-                      />
-                      <p>@<%= recommendedUser.username %></p>
-                    </a></div>
-                  
-                   
-                  
-                    <div class="me-5 d-flex align-items-center"> 
-                      <a href="follow/<%= recommendedUser.username %> "
-                      ><button class="btn btn-dark rounded-pill">Seguir</button></a>
-                  </div>
-                 </div>
-                <% } %>
-             </div>
+
+              <% for(const recommendedUser of recommendedUsers) { %>
+                <div class="mb-3 d-flex justify-content-between">
+                  <div class="ms-3 align-items-center"><a href="/profile/<%= recommendedUser.username %> ">
+                    <img
+                    id="avatar-colleft"
+                      src="/img/<%= recommendedUser.avatar %> "
+                      alt="avatar"
+                      width="80px"
+                      height="80px"
+                    />
+                    <p>@<%= recommendedUser.username %></p>
+                  </a></div>
+                
+                 
+                
+                  <div class="me-5 d-flex align-items-center"> 
+                    <a href="follow/<%= recommendedUser.username %> "
+                    ><button class="btn btn-dark rounded-pill">Seguir</button></a>
+                </div>
+               </div>
+              <% } %>
            </div>
           </div>
       </div>
