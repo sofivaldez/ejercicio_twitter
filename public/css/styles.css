@@ -131,4 +131,6 @@ a {
   font-weight: 500;
   border-color: #a2afb7;
   background-color: white;
+  display: flex;
+  justify-content: flex-end;
 }
