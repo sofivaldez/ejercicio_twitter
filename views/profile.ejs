@@ -94,21 +94,20 @@
           <% for(const tweet of wantedTweets) { %>
           <div class="mt-3 mb-3">
             <p><%= tweet.content %></p>
-            <p>a <%= tweet.createdAt %></p>
+            <p><%= tweet.formattedDate %></p>
           </div>
-          <% if (checkingOwnProfile) { %>
-          <form action="/tweet/<%= tweet.id %>?_method=DELETE " method="post">
-            <button type="submit" class="btn btn-danger">Eliminar</button>
-          </form>
-          <% } %> <% if (!tweet.likes.includes(loggedUser.id)) { %>
+
+          <% if (!tweet.likes.includes(loggedUser.id)) { %>
           <a href="/like/<%= tweet._id %> "
             ><button class="btn btn-outline-primary">Me gusta</button></a
           >
           <span style="color: blue"><%= tweet.likes.length %> </span>
+
           <% } else { %>
           <a href="/like/<%= tweet._id %> "><button class="btn btn-primary">Me gusta</button></a>
           <span style="color: blue"><%= tweet.likes.length %> </span>
-          <% } %>
+          <% } %> <% if (checkingOwnProfile) { %><a href="/tweet/<%= tweet.id %>">Eliminar</a> <% }
+          %>
           <hr />
           <% } %> <% } %>
           <script
@@ -120,6 +119,5 @@
         <div class="col-3">Columna 3</div>
       </div>
     </div>
-    >>>>>>> ffbeb7d6173a2dc3e6086afca0d895a91204b633
   </body>
 </html>

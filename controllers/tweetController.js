@@ -25,6 +25,7 @@ module.exports = {
   destroy: async (req, res) => {
     const ownTweet = req.user.tweets.includes(req.params.id);
     if (ownTweet) await Tweet.findByIdAndDelete(req.params.id);
+    await req.user.updateOne({ $pull: { tweets: req.params.id } });
     res.redirect("back");
   },
 };
