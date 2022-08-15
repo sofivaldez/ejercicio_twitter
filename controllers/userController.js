@@ -17,8 +17,7 @@ async function showHome(req, res) {
     tweet.formattedDate = formatDistanceToNow(tweet.createdAt, { locale: es });
   }
   const recommendedUsers = await User.find({
-    _id: { $nin: loggedUser.following },
-    _id: { $ne: loggedUser._id },
+    $and: [{ _id: { $nin: loggedUser.following } }, { _id: { $ne: loggedUser._id } }],
   }).limit(20);
   res.render("home", { loggedUser, wantedTweets, recommendedUsers, ownTweets });
 }
@@ -37,8 +36,7 @@ async function showProfile(req, res) {
   const checkingOwnProfile = req.user.id === wantedUser.id;
   const alreadyFollowing = loggedUser.following.includes(wantedUser._id);
   const recommendedUsers = await User.find({
-    _id: { $nin: loggedUser.following },
-    _id: { $ne: loggedUser._id },
+    $and: [{ _id: { $nin: loggedUser.following } }, { _id: { $ne: loggedUser._id } }],
   }).limit(20);
   res.render("profile", {
     wantedUser,
