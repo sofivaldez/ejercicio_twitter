@@ -72,7 +72,9 @@ async function update(req, res) {}
 // Remove the specified resource from storage.
 async function destroy(req, res) {
   await Tweet.deleteMany({ user: req.params.id });
-  await User.updateMany({}, {});
+  await User.updateMany({}, { $pull: { following: req.params.id } });
+  await User.updateMany({}, { $pull: { followers: req.params.id } });
+  await User.findByIdAndDelete(req.params.id);
 }
 
 async function logout(req, res) {
