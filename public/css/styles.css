@@ -71,7 +71,19 @@
 .buttonSidebar {
   background-color: white;
   border: 0cm;
+  font-size: large;
 }
 .buttonSidebar:hover {
   background-color: rgb(198, 196, 196);
+}
+
+#col-sidebar {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+#sidebar-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
