@@ -60,4 +60,7 @@ adminRouter.get("/seguidores/:username", checkAuthenticated, async (req, res) =>
   res.render("following_followers", { users: followers, role: "followers" });
 });
 
+adminRouter.get("/pending", (req, res) => {
+  res.render("pending");
+});
 module.exports = adminRouter;
