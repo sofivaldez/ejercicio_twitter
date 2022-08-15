@@ -1,6 +1,5 @@
 const { User, Tweet } = require("../models");
 const formidable = require("formidable");
-const bcrypt = require("bcryptjs");
 const _ = require("lodash");
 
 async function showHome(req, res) {
@@ -15,13 +14,22 @@ async function showHome(req, res) {
 }
 
 async function showProfile(req, res) {
-  const wantedUser = await User.findOne({ username: req.params.username }).populate({
-    path: "tweets",
-  });
+  const wantedUser = await User.findOne({ username: req.params.username });
+  const wantedTweets = await Tweet.find({ user: wantedUser._id })
+    .sort({
+      createdAt: "desc",
+    })
+    .limit(20);
   const loggedUser = req.user;
   const checkingOwnProfile = req.user.id === wantedUser.id;
   const alreadyFollowing = loggedUser.following.includes(wantedUser._id);
-  res.render("profile", { wantedUser, checkingOwnProfile, alreadyFollowing, loggedUser });
+  res.render("profile", {
+    wantedUser,
+    checkingOwnProfile,
+    alreadyFollowing,
+    loggedUser,
+    wantedTweets,
+  });
 }
 
 // Show the form for creating a new resource
