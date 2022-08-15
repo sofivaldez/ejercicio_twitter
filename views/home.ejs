@@ -40,7 +40,6 @@
           
             </div>
           </form>
-          <h5>Tus tweets:</h5>
           <% for(const tweet of ownTweets) { %>
           <div class="mt-3 mb-3">
             <p><%= tweet.content %></p>
@@ -62,16 +61,13 @@
           <hr />
           <% } %>
 
-          <h5>
-            Hola <%= loggedUser.firstname %>! Te extrañamos! Echa un vistazo a lo que han publicado
-            tus cuentas de interés:
-          </h5>
+          
           <% for(const tweet of wantedTweets) { %>
           <a href="profile/<%= tweet.user.username %> ">
-            <img src="/img/<%= tweet.user.avatar %>" alt="avatar" height="80px" width="80px"
+            <img src="/img/<%= tweet.user.avatar %>" alt="avatar" height="40px" width="40px"
           /></a>
-          <a href="/unfollow/<%= tweet.user.username %>" class="btn btn-dark rounded-pill">Dejar de seguir</a>
-          <h6><%= tweet.user.username %> publicó:</h6>
+          
+          <h6><%= tweet.user.username %></h6>
           <p><%= tweet.content %></p>
           <p>a <%= tweet.createdAt %></p>
           <% if (!tweet.likes.includes(loggedUser.id)) { %>
