@@ -36,12 +36,17 @@ async function showProfile(req, res) {
   const loggedUser = req.user;
   const checkingOwnProfile = req.user.id === wantedUser.id;
   const alreadyFollowing = loggedUser.following.includes(wantedUser._id);
+  const recommendedUsers = await User.find({
+    _id: { $nin: loggedUser.following },
+    _id: { $ne: loggedUser._id },
+  }).limit(20);
   res.render("profile", {
     wantedUser,
     checkingOwnProfile,
     alreadyFollowing,
     loggedUser,
     wantedTweets,
+    recommendedUsers,
   });
 }
 
