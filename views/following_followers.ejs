@@ -13,22 +13,18 @@
     />
   </head>
   <body>
-    <p style="color: red"><%= messages[0] %></p>
-
-    <form action="/login" method="post">
-      <div class="mb-3">
-        <label for="emailorusername" class="form-label"
-          >Correo electrónico o nombre de usuario</label
-        >
-        <input type="text" class="form-control" id="emailorusername" name="emailorusername" />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" name="password" />
-      </div>
-
-      <button type="submit" class="btn btn-primary">Autenticarme</button>
-    </form>
+    <% if (users.length===0&&role==='following') { %>
+    <p>Aún no sigues ninguna cuenta</p>
+    <% } %> <% if (users.length===0&&role==='followers') { %>
+    <p>Aún no tienes seguidores</p>
+    <% } %> <% if (users.length!==0) { %> <% for( const user of users ) { %>
+    <div class="mb-3">
+      <a href="/profile/<%= user.username %> ">
+        <img src="/img/<%= user.avatar %> " alt="avatar" width="80px" height="80px" />
+        <h6><%= user.username %></h6>
+      </a>
+    </div>
+    <% } %> <% } %>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

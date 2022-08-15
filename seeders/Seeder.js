@@ -26,7 +26,7 @@ module.exports = async () => {
     const randomUser = users[faker.datatype.number(users.length - 1)];
 
     const tweet = new Tweet({
-      content: faker.lorem.paragraphs(), //tratar de que sea max. 140 char
+      content: faker.lorem.paragraphs(),
       user: randomUser._id,
       createdAt: faker.date.recent(20),
     });

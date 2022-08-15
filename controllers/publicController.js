@@ -2,13 +2,22 @@ const { User } = require("../models");
 const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
 
-async function index(req, res) {}
+async function welcome(req, res) {
+  if (req.isAuthenticated()) return res.redirect("home");
+  res.render("welcome");
+}
 
 // Display the specified resource.
-async function show(req, res) {}
+async function showLogin(req, res) {
+  const messages = await req.consumeFlash("info");
+  res.render("login", { messages });
+}
 
 // Show the form for creating a new resource
-async function create(req, res) {}
+async function create(req, res) {
+  const messages = await req.consumeFlash("info");
+  res.render("register", { messages });
+}
 
 // Store a newly created resource in storage.
 async function store(req, res) {
@@ -22,7 +31,7 @@ async function store(req, res) {
       $or: [{ email: fields.email }, { username: fields.username }],
     });
     if (!user) {
-      const avatarField = files.avatar.originalFilename ? files.newFilename : null;
+      const avatarField = files.avatar.originalFilename ? files.avatar.newFilename : "default.png";
       const newUser = new User({
         firstname: fields.firstname,
         lastname: fields.lastname,
@@ -32,30 +41,23 @@ async function store(req, res) {
         bio: fields.bio,
         avatar: avatarField,
       });
-      await newUser.save();
-      res.redirect("/");
-    } else res.redirect("register");
+      try {
+        await newUser.save();
+      } catch {
+        await req.flash("info", "**Faltan campos por rellenar**");
+        return res.redirect("register");
+      }
+      return res.redirect("/");
+    } else {
+      await req.flash("info", "**El nombre de usuario/email ya está en uso**");
+      res.redirect("register");
+    }
   });
 }
 
-// Show the form for editing the specified resource.
-async function edit(req, res) {}
-
-// Update the specified resource in storage.
-async function update(req, res) {}
-
-// Remove the specified resource from storage.
-async function destroy(req, res) {}
-
-// Otros handlers...
-// ...
-
 module.exports = {
-  index,
-  show,
+  welcome,
+  showLogin,
   create,
   store,
-  edit,
-  update,
-  destroy,
 };

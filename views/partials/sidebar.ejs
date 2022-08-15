@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- CSS Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="mainDivSidebar">
+      <div>
+        <a href="/home"
+          ><img id="twitterHomeLogo" class="" src="/img/blueTwitterLogo.svg" alt="blueTwitterLogo"
+        /></a>
+      </div>
+      <div>
+        <a href="/home" class="buttonSidebar btn btn-light rounded-pill"
+          ><i class="fas fa-home"></i> Home</a
+        >
+      </div>
+      <div>
+        <a href="/pending" class="buttonSidebar btn btn-light rounded-pill">
+          <i class="fas fa-hashtag"></i> Explorar
+        </a>
+      </div>
+      <div>
+        <a href="/pending" class="buttonSidebar btn btn-light rounded-pill">
+          <i class="fas fa-bell"></i> Notificaciones
+        </a>
+      </div>
+      <div>
+        <a href="/pending" class="buttonSidebar btn btn-light rounded-pill">
+          <i class="far fa-envelope"></i> Mensajes
+        </a>
+      </div>
+      <div>
+        <a href="/pending" class="buttonSidebar btn btn-light rounded-pill">
+          <i class="far fa-bookmark"></i> Guardados
+        </a>
+      </div>
+      <div>
+        <a href="/pending" class="buttonSidebar btn btn-light rounded-pill"
+          ><i class="fas fa-list-ul"></i> Lista</a
+        >
+      </div>
+      <div>
+        <a
+          href="/profile/<%= loggedUser.username %> "
+          class="buttonSidebar btn btn-light rounded-pill"
+          ><i class="far fa-user"></i> Perfil</a
+        >
+      </div>
+      <div>
+        <a href="/pending" class="buttonSidebar btn btn-light rounded-pill"
+          ><i class="far fa-comment-dots"></i> Más</a
+        >
+      </div>
+      <div class="d-flex justify-content-between mt-5">
+        <div>
+          <a href="/profile/<%= loggedUser.username %> ">
+            <img id="sidebar-avatar" src="/img/<%= loggedUser.avatar %> " alt="profilePhoto" />
+          </a>
+        </div>
+        <div>
+          <div>
+            <a href="/profile/<%= loggedUser.username %> ">
+              <p class="mb-0"><%=loggedUser.firstname %><%= loggedUser.lastname %></p></a
+            >
+          </div>
+          <div>
+            <a href="/profile/<%= loggedUser.username %> "> <p>@<%=loggedUser.username %></p></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
