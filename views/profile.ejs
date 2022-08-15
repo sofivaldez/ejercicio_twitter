@@ -26,17 +26,24 @@
       <div class="row">
         <div id="sidebar-profile" class="col-3"><%-include ("partials/sidebar") %></div>
         <div class="col-6">
+          <img
+            id="avatar-profile"
+            src="/img/<%= wantedUser.avatar %>"
+            alt="avatar"
+            height="150px"
+            width="150px"
+          />
           <!-- <% if (checkingOwnProfile) { %>
           <h6>Echa un vistazo a tu perfil:</h6>
           <% } else { %>
-          <h6>Echa un vistazo al perfil de <%= wantedUser.username %>:</h6>
-          <% } %> -->
+            <h6>Echa un vistazo al perfil de <%= wantedUser.username %>:</h6>
+            <% } %> -->
           <div class="mt-3 mb-3">
-            <h4><%= wantedUser.firstname %> <%= wantedUser.lastname %></h4>
+            <h4 style="font-weight: 80px">
+              <%= wantedUser.firstname %> <%= wantedUser.lastname %>
+            </h4>
             <span><%= wantedUser.tweets.length %> tweets </span>
           </div>
-
-          <img src="/img/<%= wantedUser.avatar %>" alt="avatar" height="80px" width="80px" />
 
           <% if(!checkingOwnProfile && !alreadyFollowing ){ %>
           <a href="/follow/<%= wantedUser.username %>"
