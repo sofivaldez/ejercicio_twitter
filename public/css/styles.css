@@ -96,3 +96,18 @@ a {
   flex-wrap: nowrap;
   justify-content: flex-end;
 }
+#avatar-home {
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+#btn-tweet {
+  background-color: #1c9cf4;
+  border-color: #1c9cf4;
+}
+#whoToFollow {
+  background-color: rgb(245, 243, 243);
+  border-radius: 5px;
+}
+#avatar-colleft {
+  border-radius: 50%;
+}
