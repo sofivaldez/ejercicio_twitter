@@ -105,7 +105,10 @@ a {
   background-color: #1c9cf4;
   border-color: #1c9cf4;
 }
-#whoToFollow {
+#whoToFollow,
+#whoToFollowProfile {
+  margin-left: 10px;
+  margin-right: 150px;
   background-color: rgb(245, 243, 243);
   border-radius: 16px;
   border-bottom: 12px;
