@@ -23,7 +23,9 @@
         /></a>
       </div>
       <div>
-        <a class="buttonSidebar btn btn-light rounded-pill"><i class="fas fa-home"></i> Home</a>
+        <a href="/home" class="buttonSidebar btn btn-light rounded-pill"
+          ><i class="fas fa-home"></i> Home</a
+        >
       </div>
       <div>
         <a href="/pending" class="buttonSidebar btn btn-light rounded-pill">
@@ -64,13 +66,19 @@
       </div>
       <div class="d-flex justify-content-between mt-5">
         <div>
-          <img id="sidebar-avatar" src="/img/<%= loggedUser.avatar %> " alt="" srcset="" />
+          <a href="/profile/<%= loggedUser.username %> ">
+            <img id="sidebar-avatar" src="/img/<%= loggedUser.avatar %> " alt="profilePhoto" />
+          </a>
         </div>
         <div>
           <div>
-            <p class="mb-0"><%=loggedUser.firstname %><%= loggedUser.lastname %></p>
+            <a href="/profile/<%= loggedUser.username %> ">
+              <p class="mb-0"><%=loggedUser.firstname %><%= loggedUser.lastname %></p></a
+            >
           </div>
-          <div><p>@<%=loggedUser.username %></p></div>
+          <div>
+            <a href="/profile/<%= loggedUser.username %> "> <p>@<%=loggedUser.username %></p></a>
+          </div>
         </div>
       </div>
     </div>
