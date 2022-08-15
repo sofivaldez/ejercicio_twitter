@@ -96,7 +96,8 @@ a {
   flex-wrap: nowrap;
   justify-content: flex-end;
 }
-#avatar-home {
+#avatar-home,
+#avatar-profile {
   border-radius: 50%;
   margin-bottom: 10px;
 }
@@ -110,4 +111,6 @@ a {
 }
 #avatar-colleft {
   border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
