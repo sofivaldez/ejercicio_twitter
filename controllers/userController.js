@@ -49,7 +49,6 @@ async function unfollow(req, res) {
   res.redirect("/home");
 }
 
-// Show the form for editing the specified resource.
 async function editProfileForm(req, res) {
   const loggedUser = req.user;
   const notSelf = req.params.username !== loggedUser.username;
@@ -86,8 +85,6 @@ async function updateProfile(req, res) {
       : { firstname: fields.firstname, lastname: fields.lastname, bio: fields.bio };
     await req.user.updateOne(update);
     res.redirect(`/profile/${req.user.username}`);
-
-    // res.redirect("/home");
   });
 }
 
@@ -116,11 +113,15 @@ async function destroy(req, res) {
   res.redirect("/logout");
 }
 
-async function logout(req, res) {
+function logout(req, res) {
   req.logout(function (err) {
     if (err) return next(err);
     res.redirect("/");
   });
+}
+
+function showPending(req, res) {
+  res.render("pending");
 }
 
 module.exports = {
@@ -134,4 +135,5 @@ module.exports = {
   showFollowers,
   destroy,
   logout,
+  showPending,
 };

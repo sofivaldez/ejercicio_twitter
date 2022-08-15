@@ -2,13 +2,22 @@ const { User } = require("../models");
 const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
 
-async function index(req, res) {}
+async function welcome(req, res) {
+  if (req.isAuthenticated()) return res.redirect("home");
+  res.render("welcome");
+}
 
 // Display the specified resource.
-async function show(req, res) {}
+async function showLogin(req, res) {
+  const messages = await req.consumeFlash("info");
+  res.render("login", { messages });
+}
 
 // Show the form for creating a new resource
-async function create(req, res) {}
+async function create(req, res) {
+  const messages = await req.consumeFlash("info");
+  res.render("register", { messages });
+}
 
 // Store a newly created resource in storage.
 async function store(req, res) {
@@ -22,8 +31,7 @@ async function store(req, res) {
       $or: [{ email: fields.email }, { username: fields.username }],
     });
     if (!user) {
-      const avatarField = files.avatar.originalFilename ? files.avatar.newFilename : null;
-      console.log(files);
+      const avatarField = files.avatar.originalFilename ? files.avatar.newFilename : "default.png";
       const newUser = new User({
         firstname: fields.firstname,
         lastname: fields.lastname,
@@ -31,7 +39,7 @@ async function store(req, res) {
         email: fields.email,
         password: await bcrypt.hash(fields.password, 8),
         bio: fields.bio,
-        avatar: files.avatar.newFilename,
+        avatar: avatarField,
       });
       try {
         await newUser.save();
@@ -47,24 +55,9 @@ async function store(req, res) {
   });
 }
 
-// Show the form for editing the specified resource.
-async function edit(req, res) {}
-
-// Update the specified resource in storage.
-async function update(req, res) {}
-
-// Remove the specified resource from storage.
-async function destroy(req, res) {}
-
-// Otros handlers...
-// ...
-
 module.exports = {
-  index,
-  show,
+  welcome,
+  showLogin,
   create,
   store,
-  edit,
-  update,
-  destroy,
 };
