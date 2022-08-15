@@ -15,7 +15,7 @@ adminRouter.get("/profile/:username", checkAuthenticated, async (req, res) => {
   const loggedUser = req.user;
   const checkingOwnProfile = req.user.id === wantedUser.id;
   const alreadyFollowing = loggedUser.following.includes(wantedUser._id);
-  res.render("profile", { wantedUser, checkingOwnProfile, alreadyFollowing });
+  res.render("profile", { wantedUser, checkingOwnProfile, alreadyFollowing, loggedUser });
 });
 
 adminRouter.get("/follow/:username", checkAuthenticated, async (req, res) => {

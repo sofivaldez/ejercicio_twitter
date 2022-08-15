@@ -8,13 +8,14 @@ async function index(req, res) {}
 
 // Display the specified resource.
 async function show(req, res) {
-  const wantedTweets = await Tweet.find({ user: { $in: req.user.following } })
+  const loggedUser = req.user;
+  const wantedTweets = await Tweet.find({ user: { $in: loggedUser.following } })
     .populate({ path: "user" })
     .sort({ createdAt: "desc" })
     .limit(20);
-  const loggedUser = req.user;
+  const ownTweets = await Tweet.find({ user: loggedUser._id }).sort({ createdAt: "desc" }).limit(5);
   const recommendedUsers = await User.find({ _id: { $nin: loggedUser.following } }).limit(20);
-  res.render("home", { loggedUser, wantedTweets, recommendedUsers });
+  res.render("home", { loggedUser, wantedTweets, recommendedUsers, ownTweets });
 }
 
 // Show the form for creating a new resource

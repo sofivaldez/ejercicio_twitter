@@ -26,12 +26,28 @@
           rows="3"
           placeholder="¿Qué está pasando?"
         ></textarea>
-        <button type="submit" class="btn btn-primary">Tweet</button>
+        <button type="submit" class="btn btn-primary">Twittear</button>
       </div>
     </form>
+    <h5>Tus tweets:</h5>
+    <% for(const tweet of ownTweets) { %>
+    <div class="mt-3 mb-3">
+      <p><%= tweet.content %></p>
+      <p>a <%= tweet.createdAt %></p>
+    </div>
 
+    <a href="/deleteTweet/<%= tweet.id %> "><button class="btn btn-danger">Eliminar</button></a>
+    <% if (!tweet.likes.includes(loggedUser.id)) { %>
+    <a href="/like/<%= tweet._id %> "><button class="btn btn-outline-primary">Me gusta</button></a>
+    <span style="color: blue"><%= tweet.likes.length %> </span>
+    <% } else { %>
+    <a href="/like/<%= tweet._id %> "><button class="btn btn-primary">Me gusta</button></a>
+    <span style="color: blue"><%= tweet.likes.length %> </span>
+    <% } %>
+    <hr />
+    <% } %>
     <h5>
-      Hola <%= loggedUser.firstname %>! Te extrañamos! Echa un vistazo a lo que han publicado tus
+      Hola <%= loggedUser.firstname %>! Te extrañamos! Echa un vistazo a lo que han twitteado tus
       cuentas de interés:
     </h5>
     <% for(const tweet of wantedTweets) { %>

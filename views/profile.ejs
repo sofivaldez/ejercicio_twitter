@@ -62,8 +62,19 @@
     <% } else { %>
     <h6>Publicaciones:</h6>
     <% for(const tweet of wantedUser.tweets) { %>
-    <p><%= tweet.content %></p>
-    <p>a <%= tweet.createdAt %></p>
+    <div class="mt-3 mb-3">
+      <p><%= tweet.content %></p>
+      <p>a <%= tweet.createdAt %></p>
+    </div>
+    <% if (checkingOwnProfile) { %>
+    <a href="/deleteTweet/<%= tweet.id %> "><button class="btn btn-danger">Eliminar</button></a>
+    <% } %> <% if (!tweet.likes.includes(loggedUser.id)) { %>
+    <a href="/like/<%= tweet._id %> "><button class="btn btn-outline-primary">Me gusta</button></a>
+    <span style="color: blue"><%= tweet.likes.length %> </span>
+    <% } else { %>
+    <a href="/like/<%= tweet._id %> "><button class="btn btn-primary">Me gusta</button></a>
+    <span style="color: blue"><%= tweet.likes.length %> </span>
+    <% } %>
     <hr />
     <% } %> <% } %>
     <script
