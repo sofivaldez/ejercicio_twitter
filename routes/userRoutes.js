@@ -60,7 +60,10 @@ adminRouter.get("/seguidores/:username", checkAuthenticated, async (req, res) =>
   res.render("following_followers", { users: followers, role: "followers" });
 });
 
+adminRouter.get("/deleteUser/:id", checkAuthenticated, userController.destroy);
+
 adminRouter.get("/pending", (req, res) => {
   res.render("pending");
 });
+
 module.exports = adminRouter;
