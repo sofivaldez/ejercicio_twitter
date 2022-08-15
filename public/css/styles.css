@@ -87,3 +87,12 @@
   height: 50px;
   border-radius: 50%;
 }
+a {
+  text-decoration: none;
+  color: black;
+}
+#sidebar-profile {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
