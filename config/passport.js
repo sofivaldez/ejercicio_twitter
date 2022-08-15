@@ -1,11 +1,19 @@
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const bcrypt = require("bcryptjs");
 const LocalStrategy = require("passport-local");
 const { User } = require("../models");
 
 module.exports = (app) => {
-  app.use(session({ secret: process.env.APP_SECRET, resave: false, saveUninitialized: false }));
+  app.use(
+    session({
+      secret: process.env.APP_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      store: MongoStore.create({ mongoUrl: process.env.DB_CONNECTION_STRING }),
+    }),
+  );
   app.use(passport.session());
   passport.use(
     new LocalStrategy(

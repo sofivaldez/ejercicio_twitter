@@ -1,12 +1,7 @@
 const { User, Tweet } = require("../models");
 const formidable = require("formidable");
-const {
-  format,
-  formatDistance,
-  formatRelative,
-  subDays,
-  formatDistanceToNow,
-} = require("date-fns");
+const { formatDistanceToNow } = require("date-fns");
+const { es } = require("date-fns/locale");
 
 async function showHome(req, res) {
   const loggedUser = req.user;
@@ -16,10 +11,10 @@ async function showHome(req, res) {
     .limit(20);
   const ownTweets = await Tweet.find({ user: loggedUser._id }).sort({ createdAt: "desc" }).limit(5);
   for (const tweet of wantedTweets) {
-    tweet.formattedDate = formatDistanceToNow(tweet.createdAt);
+    tweet.formattedDate = formatDistanceToNow(tweet.createdAt, { locale: es });
   }
   for (const tweet of ownTweets) {
-    tweet.formattedDate = formatDistanceToNow(tweet.createdAt);
+    tweet.formattedDate = formatDistanceToNow(tweet.createdAt, { locale: es });
   }
   const recommendedUsers = await User.find({ _id: { $nin: loggedUser.following } }).limit(20);
   res.render("home", { loggedUser, wantedTweets, recommendedUsers, ownTweets });
@@ -32,6 +27,9 @@ async function showProfile(req, res) {
       createdAt: "desc",
     })
     .limit(20);
+  for (const tweet of wantedTweets) {
+    tweet.formattedDate = formatDistanceToNow(tweet.createdAt, { locale: es });
+  }
   const loggedUser = req.user;
   const checkingOwnProfile = req.user.id === wantedUser.id;
   const alreadyFollowing = loggedUser.following.includes(wantedUser._id);

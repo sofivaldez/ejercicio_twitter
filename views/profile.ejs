@@ -26,6 +26,20 @@
       <div class="row">
         <div id="sidebar-profile" class="col-3"><%-include ("partials/sidebar") %></div>
         <div class="col-6">
+          <div>
+            <!-- <% if (checkingOwnProfile) { %>
+          <h6>Echa un vistazo a tu perfil:</h6>
+          <% } else { %>
+            <h6>Echa un vistazo al perfil de <%= wantedUser.username %>:</h6>
+            <% } %> -->
+            <div class="mt-3 mb-3">
+              <h4 style="font-weight: 80px">
+                <%= wantedUser.firstname %> <%= wantedUser.lastname %>
+              </h4>
+              <span><%= wantedUser.tweets.length %> tweets </span>
+            </div>
+          </div>
+
           <img
             id="avatar-profile"
             src="/img/<%= wantedUser.avatar %>"
@@ -33,17 +47,6 @@
             height="150px"
             width="150px"
           />
-          <!-- <% if (checkingOwnProfile) { %>
-          <h6>Echa un vistazo a tu perfil:</h6>
-          <% } else { %>
-            <h6>Echa un vistazo al perfil de <%= wantedUser.username %>:</h6>
-            <% } %> -->
-          <div class="mt-3 mb-3">
-            <h4 style="font-weight: 80px">
-              <%= wantedUser.firstname %> <%= wantedUser.lastname %>
-            </h4>
-            <span><%= wantedUser.tweets.length %> tweets </span>
-          </div>
 
           <% if(!checkingOwnProfile && !alreadyFollowing ){ %>
           <a href="/follow/<%= wantedUser.username %>"
@@ -54,7 +57,12 @@
             ><button class="btn btn-primary">Dejar de seguir</button></a
           >
           <% } %> <% if (checkingOwnProfile) { %>
-          <a class="btn btn-primary" href="/editar/<%= wantedUser.username %> ">Editar perfil</a>
+          <a
+            id="btn-editar"
+            class="btn btn-light rounded-pill"
+            href="/editar/<%= wantedUser.username %> "
+            >Editar perfil</a
+          >
           <% } %>
 
           <div class="mt-3 mb-3">
@@ -86,7 +94,7 @@
           <% for(const tweet of wantedTweets) { %>
           <div class="mt-3 mb-3">
             <p><%= tweet.content %></p>
-            <p>a <%= tweet.createdAt %></p>
+            <p><%= tweet.formattedDate %></p>
           </div>
           <% if (checkingOwnProfile) { %>
           <form action="/tweet/<%= tweet.id %>?_method=DELETE " method="post">
@@ -112,5 +120,6 @@
         <div class="col-3">Columna 3</div>
       </div>
     </div>
+    >>>>>>> ffbeb7d6173a2dc3e6086afca0d895a91204b633
   </body>
 </html>

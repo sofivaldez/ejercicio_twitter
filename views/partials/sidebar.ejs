@@ -16,55 +16,55 @@
     />
   </head>
   <body>
-    <div id="mainDivSidebar">
-      <div>
+    <div class="me-5" id="mainDivSidebar">
+      <div class="menu">
         <a href="/home"
           ><img id="twitterHomeLogo" class="" src="/img/blueTwitterLogo.svg" alt="blueTwitterLogo"
         /></a>
       </div>
-      <div>
+      <div class="menu">
         <a href="/home" class="buttonSidebar btn btn-light rounded-pill"
           ><i class="fas fa-home"></i> Home</a
         >
       </div>
-      <div>
+      <div class="menu">
         <a href="/pending" class="buttonSidebar btn btn-light rounded-pill">
           <i class="fas fa-hashtag"></i> Explorar
         </a>
       </div>
-      <div>
+      <div class="menu">
         <a href="/pending" class="buttonSidebar btn btn-light rounded-pill">
           <i class="fas fa-bell"></i> Notificaciones
         </a>
       </div>
-      <div>
+      <div class="menu">
         <a href="/pending" class="buttonSidebar btn btn-light rounded-pill">
           <i class="far fa-envelope"></i> Mensajes
         </a>
       </div>
-      <div>
+      <div class="menu">
         <a href="/pending" class="buttonSidebar btn btn-light rounded-pill">
           <i class="far fa-bookmark"></i> Guardados
         </a>
       </div>
-      <div>
+      <div class="menu">
         <a href="/pending" class="buttonSidebar btn btn-light rounded-pill"
           ><i class="fas fa-list-ul"></i> Lista</a
         >
       </div>
-      <div>
+      <div class="menu">
         <a
           href="/profile/<%= loggedUser.username %> "
           class="buttonSidebar btn btn-light rounded-pill"
           ><i class="far fa-user"></i> Perfil</a
         >
       </div>
-      <div>
+      <div class="menu">
         <a href="/pending" class="buttonSidebar btn btn-light rounded-pill"
           ><i class="far fa-comment-dots"></i> Más</a
         >
       </div>
-      <div class="d-flex justify-content-between mt-5">
+      <div id="user-avatar-sidebar" class="d-flex justify-content-between">
         <div>
           <a href="/profile/<%= loggedUser.username %> ">
             <img id="sidebar-avatar" src="/img/<%= loggedUser.avatar %> " alt="profilePhoto" />
