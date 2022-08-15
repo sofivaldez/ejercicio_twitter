@@ -134,3 +134,11 @@ a {
   display: flex;
   justify-content: flex-end;
 }
+#foto-boton-perfil {
+  position: relative;
+}
+#editar-seguir {
+  position: absolute;
+  right: 10px;
+  top: 110px;
+}

@@ -57,19 +57,24 @@
                 <span style="color: rgb(255, 106, 196)"><%= tweet.likes.length %> </span>
                 <% } %>
                 
-                <a href="/tweet/<%= tweet.id %>">Eliminar</a>
+                <a class="ms-4" style="color: #1c9cf4;" href="/tweet/<%= tweet.id %>"><i class="fas fa-trash"></i></a>
                 <hr />
           <% } %>
 
           
           <% for(const tweet of wantedTweets) { %>
-          <a href="profile/<%= tweet.user.username %> ">
-            <img src="/img/<%= tweet.user.avatar %>" alt="avatar" height="40px" width="40px"
-          /></a>
+            <div class="d-flex align-items-center">
+              <a href="profile/<%= tweet.user.username %> ">
+                <img src="/img/<%= tweet.user.avatar %>" alt="avatar" height="40px" width="40px"
+              /></a>
+              <div class="d-flex">
+                <span> <p class="ms-2 mt-0 me-0 mb-0">@<%= tweet.user.username %> • <%= tweet.formattedDate %></p></span>  
+              </div>
+            </div>
           
-          <h6><%= tweet.user.username %></h6>
+         
           <p><%= tweet.content %></p>
-          <p><%= tweet.formattedDate %></p>
+         
           <% if (!tweet.likes.includes(loggedUser.id)) { %>
           <a style="color: rgb(255, 106, 196)" href="/like/<%= tweet._id %> "
             ><i class="far fa-heart"></i></a
@@ -106,13 +111,10 @@
                       <a href="follow/<%= recommendedUser.username %> "
                       ><button class="btn btn-dark rounded-pill">Seguir</button></a>
                   </div>
-                 
                  </div>
-               
                 <% } %>
              </div>
-         
-        </div>
+           </div>
       </div>
     </div>
 

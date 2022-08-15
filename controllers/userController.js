@@ -16,10 +16,7 @@ async function showHome(req, res) {
   for (const tweet of ownTweets) {
     tweet.formattedDate = formatDistanceToNow(tweet.createdAt, { locale: es });
   }
-  const recommendedUsers = await User.find({
-    _id: { $nin: loggedUser.following },
-    _id: { $ne: loggedUser._id },
-  }).limit(20);
+  const recommendedUsers = await User.find({ _id: { $nin: loggedUser.following } }).limit(20);
   res.render("home", { loggedUser, wantedTweets, recommendedUsers, ownTweets });
 }
 
