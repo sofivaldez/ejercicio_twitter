@@ -15,7 +15,7 @@
   <body>
     <% if (users.length===0&&role==='following') { %>
     <p>Aún no sigues ninguna cuenta</p>
-    <% } %> <% if (users.length===0&&role==='following') { %>
+    <% } %> <% if (users.length===0&&role==='followers') { %>
     <p>Aún no tienes seguidores</p>
     <% } %> <% if (users.length!==0) { %> <% for( const user of users ) { %>
     <div class="mb-3">
