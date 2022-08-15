@@ -46,19 +46,19 @@
             <p><%= tweet.formattedDate %></p>
           </div>
 
-          <form action="/tweet/<%= tweet.id %>?_method=DELETE " method="post"
-            ><button type="submit" class="btn btn-danger">Eliminar</button></form
-          >
+          
           <% if (!tweet.likes.includes(loggedUser.id)) { %>
             <a style="color: rgb(255, 106, 196)" href="/like/<%= tweet._id %> "
               ><i class="far fa-heart"></i></a
-            >
-            <span style="color: rgb(255, 106, 196)"><%= tweet.likes.length %> </span>
-          <% } else { %>
-            <a style="color: rgb(255, 106, 196)" href="/like/<%= tweet._id %> "><i class="fas fa-heart"></i></a>
-            <span style="color: rgb(255, 106, 196)"><%= tweet.likes.length %> </span>
-          <% } %>
-          <hr />
+              >
+              <span style="color: rgb(255, 106, 196)"><%= tweet.likes.length %> </span>
+              <% } else { %>
+                <a style="color: rgb(255, 106, 196)" href="/like/<%= tweet._id %> "><i class="fas fa-heart"></i></a>
+                <span style="color: rgb(255, 106, 196)"><%= tweet.likes.length %> </span>
+                <% } %>
+                
+                <a href="/tweet/<%= tweet.id %>">Eliminar</a>
+                <hr />
           <% } %>
 
           
