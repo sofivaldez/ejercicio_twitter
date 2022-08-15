@@ -121,3 +121,9 @@ a {
 #user-avatar-sidebar {
   margin-top: 200px;
 }
+#btn-editar {
+  color: black;
+  font-weight: 500;
+  border-color: #a2afb7;
+  background-color: white;
+}
