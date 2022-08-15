@@ -13,11 +13,11 @@
     />
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-3" id="col-sidebar"><%- include ("partials/sidebar") %></div>
+        <div class="col-2" id="col-sidebar"><%- include ("partials/sidebar") %></div>
         <div class="col-6">
-          <div><a href="/profile/<%= loggedUser.username %>">
+          <div class="mb-3"><a href="/profile/<%= loggedUser.username %>">
             <img
               id="avatar-home"
               src="/img/<%= loggedUser.avatar %>"
@@ -47,17 +47,17 @@
             <p>a <%= tweet.createdAt %></p>
           </div>
 
-          <a href="/deleteTweet/<%= tweet.id %> "
-            ><button class="btn btn-danger">Eliminar</button></a
+          <form action="/tweet/<%= tweet.id %>?_method=DELETE " method="post"
+            ><button type="submit" class="btn btn-danger">Eliminar</button></form
           >
           <% if (!tweet.likes.includes(loggedUser.id)) { %>
-          <a href="/like/<%= tweet._id %> "
-            ><button class="btn btn-outline-primary">Me gusta</button></a
-          >
-          <span style="color: blue"><%= tweet.likes.length %> </span>
+            <a style="color: rgb(255, 106, 196)" href="/like/<%= tweet._id %> "
+              ><i class="far fa-heart"></i></a
+            >
+            <span style="color: rgb(255, 106, 196)"><%= tweet.likes.length %> </span>
           <% } else { %>
-          <a href="/like/<%= tweet._id %> "><button class="btn btn-primary">Me gusta</button></a>
-          <span style="color: blue"><%= tweet.likes.length %> </span>
+            <a style="color: rgb(255, 106, 196)" href="/like/<%= tweet._id %> "><i class="fas fa-heart"></i></a>
+            <span style="color: rgb(255, 106, 196)"><%= tweet.likes.length %> </span>
           <% } %>
           <hr />
           <% } %>
@@ -86,7 +86,7 @@
           <hr />
           <% } %>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <div id="whoToFollow"  > 
             <h5>Cuentas a seguir:</h5>
             <div>

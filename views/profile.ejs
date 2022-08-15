@@ -89,9 +89,9 @@
             <p>a <%= tweet.createdAt %></p>
           </div>
           <% if (checkingOwnProfile) { %>
-          <a href="/deleteTweet/<%= tweet.id %> "
-            ><button class="btn btn-danger">Eliminar</button></a
-          >
+          <form action="/tweet/<%= tweet.id %>?_method=DELETE " method="post">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
           <% } %> <% if (!tweet.likes.includes(loggedUser.id)) { %>
           <a href="/like/<%= tweet._id %> "
             ><button class="btn btn-outline-primary">Me gusta</button></a

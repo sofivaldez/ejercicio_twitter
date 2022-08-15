@@ -3,7 +3,7 @@ module.exports = (mongoose) => {
   const tweetSchema = new Schema(
     {
       content: { type: String, max: 140, required: true },
-      user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
       likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     },
     { timestamps: true },

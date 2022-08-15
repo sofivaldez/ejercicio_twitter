@@ -3,11 +3,7 @@ const formidable = require("formidable");
 const bcrypt = require("bcryptjs");
 const _ = require("lodash");
 
-// Display a listing of the resource.
-async function index(req, res) {}
-
-// Display the specified resource.
-async function show(req, res) {
+async function showHome(req, res) {
   const loggedUser = req.user;
   const wantedTweets = await Tweet.find({ user: { $in: loggedUser.following } })
     .populate({ path: "user" })
@@ -18,11 +14,40 @@ async function show(req, res) {
   res.render("home", { loggedUser, wantedTweets, recommendedUsers, ownTweets });
 }
 
-// Show the form for creating a new resource
-async function create(req, res) {}
+async function showProfile(req, res) {
+  const wantedUser = await User.findOne({ username: req.params.username }).populate({
+    path: "tweets",
+  });
+  const loggedUser = req.user;
+  const checkingOwnProfile = req.user.id === wantedUser.id;
+  const alreadyFollowing = loggedUser.following.includes(wantedUser._id);
+  res.render("profile", { wantedUser, checkingOwnProfile, alreadyFollowing, loggedUser });
+}
 
-// Store a newly created resource in storage.
-async function store(req, res) {}
+// Show the form for creating a new resource
+async function follow(req, res) {
+  const wantedUser = await User.findOne({ username: req.params.username });
+  const loggedUser = req.user;
+  const notFollowing = !loggedUser.following.includes(wantedUser._id);
+  const notSelf = !wantedUser._id.equals(loggedUser._id);
+  if (notFollowing && notSelf) {
+    await loggedUser.updateOne({ $push: { following: wantedUser._id } });
+    await wantedUser.updateOne({ $push: { followers: loggedUser._id } });
+  }
+  res.redirect("/home");
+}
+
+async function unfollow(req, res) {
+  const wantedUser = await User.findOne({ username: req.params.username });
+  const loggedUser = req.user;
+  const alreadyFollowing = loggedUser.following.includes(wantedUser._id);
+  const notSelf = !wantedUser._id.equals(loggedUser._id);
+  if (alreadyFollowing && notSelf) {
+    await loggedUser.updateOne({ $pull: { following: wantedUser._id } });
+    await wantedUser.updateOne({ $pull: { followers: loggedUser._id } });
+  }
+  res.redirect("/home");
+}
 
 // Show the form for editing the specified resource.
 async function editProfileForm(req, res) {
@@ -66,10 +91,22 @@ async function updateProfile(req, res) {
   });
 }
 
-// Update the specified resource in storage.
-async function update(req, res) {}
+async function showFollowing(req, res) {
+  const wantedUser = await User.findOne({ username: req.params.username }).populate({
+    path: "following",
+  });
+  const following = wantedUser.following;
+  res.render("following_followers", { users: following, role: "following" });
+}
 
-// Remove the specified resource from storage.
+async function showFollowers(req, res) {
+  const wantedUser = await User.findOne({ username: req.params.username }).populate({
+    path: "followers",
+  });
+  const followers = wantedUser.followers;
+  res.render("following_followers", { users: followers, role: "followers" });
+}
+
 async function destroy(req, res) {
   if (req.user.id !== req.params.id) return res.redirect("back");
   await Tweet.deleteMany({ user: req.params.id });
@@ -87,13 +124,14 @@ async function logout(req, res) {
 }
 
 module.exports = {
-  index,
-  show,
-  create,
-  store,
+  showHome,
+  showProfile,
+  follow,
+  unfollow,
   editProfileForm,
   updateProfile,
-  // update,
+  showFollowing,
+  showFollowers,
   destroy,
   logout,
 };
